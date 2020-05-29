@@ -29,3 +29,12 @@
 #timeSlider:hover{
     -fx-opacity: 1;
 }
+#menuBox{
+    -fx-opacity: 0.1;
+}
+#menuBox:hover{
+    -fx-opacity: 1;
+}
+#audioSpectrum{
+    -fx-background-color: transparent;
+}

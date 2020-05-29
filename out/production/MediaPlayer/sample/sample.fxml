@@ -4,31 +4,38 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.media.*?>
+<?import javafx.scene.shape.*?>
 
 <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#keyPressed" prefHeight="400.0" prefWidth="600.0" scaleShape="false" stylesheets="@styleSheet.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <bottom>
       <VBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
-            <HBox alignment="CENTER" minHeight="-Infinity" prefHeight="35.0" prefWidth="600.0">
+            <HBox fx:id="menuBox" alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="600.0">
                <children>
-                  <Button fx:id="selectFileButton" mnemonicParsing="false" onAction="#selectFileButtonAction" prefHeight="30.0" prefWidth="30.0">
+                  <Button fx:id="selectFileButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#selectFileButtonAction" prefHeight="30.0" prefWidth="30.0">
                      <HBox.margin>
                         <Insets right="10.0" />
                      </HBox.margin></Button>
-                  <Button fx:id="playButton" mnemonicParsing="false" onAction="#playButtonAction" onKeyPressed="#keyPressed" prefHeight="30.0" prefWidth="30.0">
+                  <Button fx:id="playButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#playButtonAction" onKeyPressed="#keyPressed" prefHeight="30.0" prefWidth="30.0">
                      <HBox.margin>
                         <Insets right="10.0" />
                      </HBox.margin></Button>
-                  <Button fx:id="stopButton" mnemonicParsing="false" onAction="#stopButtonAction" prefHeight="30.0" prefWidth="30.0">
+                  <Button fx:id="stopButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#stopButtonAction" prefHeight="30.0" prefWidth="30.0">
                      <HBox.margin>
                         <Insets right="20.0" />
                      </HBox.margin></Button>
                   <Button mnemonicParsing="false" onAction="#slowerButtonAction" text="Speed -25%" />
-                  <Button mnemonicParsing="false" onAction="#normalSpeedButtonAction" text="Speed 1x" />
+                  <Button mnemonicParsing="false" onAction="#normalSpeedButtonAction" text="Speed 1x">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin></Button>
                   <Button mnemonicParsing="false" onAction="#fasterButtonAction" text="Speed +25%" />
                   <Button mnemonicParsing="false" onAction="#exitButtonAction" text="Exit" />
                   <Slider fx:id="volumeSlider" />
                </children>
+               <VBox.margin>
+                  <Insets bottom="5.0" />
+               </VBox.margin>
             </HBox>
          </children>
       </VBox>
@@ -37,7 +44,93 @@
       <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
             <MediaView fx:id="mediaView" fitHeight="200.0" fitWidth="200.0" nodeOrientation="INHERIT" />
-            <Slider fx:id="timeSlider" StackPane.alignment="BOTTOM_CENTER" />
+            <HBox fx:id="audioSpectrum" alignment="BOTTOM_CENTER" prefHeight="396.0" prefWidth="600.0">
+               <children>
+                  <Rectangle fx:id="box0" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" stroke="TRANSPARENT" strokeType="INSIDE" width="30.0">
+                     <HBox.margin>
+                        <Insets bottom="15.0" />
+                     </HBox.margin></Rectangle>
+                  <Rectangle fx:id="box1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" stroke="TRANSPARENT" strokeType="INSIDE" width="30.0">
+                     <HBox.margin>
+                        <Insets bottom="15.0" />
+                     </HBox.margin>
+                  </Rectangle>
+                  <Rectangle fx:id="box2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" stroke="TRANSPARENT" strokeType="INSIDE" width="30.0">
+                     <HBox.margin>
+                        <Insets bottom="15.0" />
+                     </HBox.margin>
+                  </Rectangle>
+                  <Rectangle fx:id="box3" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" stroke="TRANSPARENT" strokeType="INSIDE" width="30.0">
+                     <HBox.margin>
+                        <Insets bottom="15.0" />
+                     </HBox.margin>
+                  </Rectangle>
+                  <Rectangle fx:id="box4" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" stroke="TRANSPARENT" strokeType="INSIDE" width="30.0">
+                     <HBox.margin>
+                        <Insets bottom="15.0" />
+                     </HBox.margin>
+                  </Rectangle>
+                  <Rectangle fx:id="box5" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" stroke="TRANSPARENT" strokeType="INSIDE" width="30.0">
+                     <HBox.margin>
+                        <Insets bottom="15.0" />
+                     </HBox.margin>
+                  </Rectangle>
+                  <Rectangle fx:id="box6" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" stroke="TRANSPARENT" strokeType="INSIDE" width="30.0">
+                     <HBox.margin>
+                        <Insets bottom="15.0" />
+                     </HBox.margin>
+                  </Rectangle>
+                  <Rectangle fx:id="box7" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" stroke="TRANSPARENT" strokeType="INSIDE" width="30.0">
+                     <HBox.margin>
+                        <Insets bottom="15.0" />
+                     </HBox.margin>
+                  </Rectangle>
+                  <Rectangle fx:id="box8" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" stroke="TRANSPARENT" strokeType="INSIDE" width="30.0">
+                     <HBox.margin>
+                        <Insets bottom="15.0" />
+                     </HBox.margin>
+                  </Rectangle>
+                  <Rectangle fx:id="box9" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" stroke="TRANSPARENT" strokeType="INSIDE" width="30.0">
+                     <HBox.margin>
+                        <Insets bottom="15.0" />
+                     </HBox.margin>
+                  </Rectangle>
+                  <Rectangle fx:id="box10" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" stroke="TRANSPARENT" strokeType="INSIDE" width="30.0">
+                     <HBox.margin>
+                        <Insets bottom="15.0" />
+                     </HBox.margin>
+                  </Rectangle>
+                  <Rectangle fx:id="box11" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" stroke="TRANSPARENT" strokeType="INSIDE" width="30.0">
+                     <HBox.margin>
+                        <Insets bottom="15.0" />
+                     </HBox.margin>
+                  </Rectangle>
+                  <Rectangle fx:id="box12" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" stroke="TRANSPARENT" strokeType="INSIDE" width="30.0">
+                     <HBox.margin>
+                        <Insets bottom="15.0" />
+                     </HBox.margin>
+                  </Rectangle>
+                  <Rectangle fx:id="box13" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" stroke="TRANSPARENT" strokeType="INSIDE" width="30.0">
+                     <HBox.margin>
+                        <Insets bottom="15.0" />
+                     </HBox.margin>
+                  </Rectangle>
+                  <Rectangle fx:id="box14" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" stroke="TRANSPARENT" strokeType="INSIDE" width="30.0">
+                     <HBox.margin>
+                        <Insets bottom="15.0" />
+                     </HBox.margin>
+                  </Rectangle>
+                  <Rectangle fx:id="box15" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" stroke="TRANSPARENT" strokeType="INSIDE" width="30.0">
+                     <HBox.margin>
+                        <Insets bottom="15.0" />
+                     </HBox.margin>
+                  </Rectangle>
+               </children>
+            </HBox>
+            <Slider fx:id="timeSlider" StackPane.alignment="BOTTOM_CENTER">
+               <StackPane.margin>
+                  <Insets bottom="5.0" />
+               </StackPane.margin></Slider>
          </children>
       </StackPane>
    </center>

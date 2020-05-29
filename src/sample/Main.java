@@ -28,8 +28,9 @@ public class Main extends Application {
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent keyEvent) {
-                switch (keyEvent.getCharacter()){
-                    case "k":
+                switch (keyEvent.getCode()){
+                    case F:
+                        primaryStage.setFullScreen(true);
                 }
             }
         });
