@@ -12,6 +12,7 @@
          <children>
             <HBox fx:id="menuBox" alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="600.0">
                <children>
+                  <Button fx:id="testButton" mnemonicParsing="false" onAction="#loadTestFile" prefHeight="0.0" prefWidth="0.0" textFill="TRANSPARENT" />
                   <Button fx:id="selectFileButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#selectFileButtonAction" prefHeight="30.0" prefWidth="30.0">
                      <HBox.margin>
                         <Insets right="10.0" />
@@ -30,7 +31,7 @@
                         <Insets />
                      </HBox.margin></Button>
                   <Button mnemonicParsing="false" onAction="#fasterButtonAction" text="Speed +25%" />
-                  <Button mnemonicParsing="false" onAction="#exitButtonAction" text="Exit" />
+                  <Button fx:id="exitButton" mnemonicParsing="false" onAction="#exitButtonAction" text="Exit" />
                   <Slider fx:id="volumeSlider" />
                </children>
                <VBox.margin>

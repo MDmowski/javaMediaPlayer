@@ -50,7 +50,7 @@ public class Controller implements Initializable {
 
     private MediaPlayer mediaPlayer;
 
-    private Media media = null;
+    private Media media;
 
     @FXML
     private MediaView mediaView;
@@ -103,7 +103,7 @@ public class Controller implements Initializable {
 
 
     @FXML
-    private void selectFileButtonAction(ActionEvent event){ // handling events related to the file selection button
+    public void selectFileButtonAction(ActionEvent event){ // handling events related to the file selection button
         audioSpectrumDisable();
         FileChooser fileChooser = new FileChooser();
         FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("Select a File (*.mp4, *.mp3)", "*.mp4", "*.mp3");
@@ -111,91 +111,39 @@ public class Controller implements Initializable {
         File file = fileChooser.showOpenDialog(null);
         if(file != null) {  // if file opened correctly create new media
             filePath = file.toURI().toString();
-            System.out.print(file.toURI().toString());
-            media = null;
-            try{
-                media = new Media(filePath);
-            }catch (Exception e){
-                System.out.print(e);
-            }
-            mediaPlayer = new MediaPlayer(media); // load media to a media player
-            mediaView.setMediaPlayer(mediaPlayer);
-            mediaPlayer.setOnReady(new Runnable() {
-                @Override
-                public void run() {
-                    isFileLoaded = true;
-                    DoubleProperty width = mediaView.fitWidthProperty();
-                    DoubleProperty height = mediaView.fitHeightProperty();
-
-                    width.bind(Bindings.selectDouble(mediaView.sceneProperty(), "width"));
-                    height.bind(Bindings.selectDouble(mediaView.sceneProperty(), "height"));
-
-                    volumeSlider.setValue(mediaPlayer.getVolume() * 100); // set default volume to 100%
-                    volumeSlider.valueProperty().addListener(new InvalidationListener() {
-                        @Override
-                        public void invalidated(Observable observable) {
-                            mediaPlayer.setVolume(volumeSlider.getValue() / 100);
-                        }
-                    });
-
-
-                    timeSlider.setCursor(Cursor.CLOSED_HAND);
-                    timeSlider.setMin(0);
-                    timeSlider.setMax(mediaPlayer.getTotalDuration().toSeconds()); // get max value of a slider based on the length of media
-                    timeSlider.setValue(0);
-
-                    mediaPlayer.currentTimeProperty().addListener(new ChangeListener<Duration>() { // update value of a slider based on the current time of media
-                        @Override
-                        public void changed(ObservableValue<? extends Duration> observableValue, Duration duration, Duration current) {
-
-                            timeSlider.setValue(current.toSeconds());
-                        }
-                    });
-
-                    timeSlider.setOnMouseClicked(new EventHandler<MouseEvent>() {  // jump to time based on the slider
-                        @Override
-                        public void handle(MouseEvent mouseEvent) {
-                            mediaPlayer.seek(Duration.seconds(timeSlider.getValue()));
-                        }
-                    });
-
-                    if(getExtensionFromFilePath(filePath).equals(Optional.of("mp3"))) // if mp3 loaded show audio spectrum
-                        audioSpectrum();
-
-                    mediaPlayer.play();
-                }
-
-            });
+            System.out.print(filePath);
+            media = new Media(filePath);
+            preparePlayer();
         }
-
     }
+
     @FXML
-    private void playButtonAction(ActionEvent event){ // handling events related to the play button
+    public void playButtonAction(ActionEvent event){ // handling events related to the play button
         playPause();
     }
     @FXML
-    private void stopButtonAction(ActionEvent event) { // handling events related to the stop button
+    public void stopButtonAction(ActionEvent event) { // handling events related to the stop button
         mediaPlayer.stop();
     }
     @FXML
-    private void fasterButtonAction(ActionEvent event){ // handling events related to the faster button - add 25% speed
+    public void fasterButtonAction(ActionEvent event){ // handling events related to the faster button - add 25% speed
         mediaPlayer.setRate(mediaPlayer.getRate() + 0.25);
     }
     @FXML
-    private void slowerButtonAction(ActionEvent event){ // handling events related to the slower button
+    public void slowerButtonAction(ActionEvent event){ // handling events related to the slower button
         if(mediaPlayer.getRate() > 0.25)
             mediaPlayer.setRate(mediaPlayer.getRate() - 0.25); // decrease speed by 25% if speed wouldn't be 0
     }
     @FXML
-    private void normalSpeedButtonAction(ActionEvent event){ // handling events related to the normal speed button - setting speed to 100%
+    public void normalSpeedButtonAction(ActionEvent event){ // handling events related to the normal speed button - setting speed to 100%
         mediaPlayer.setRate(1);
     }
     @FXML
-    private void exitButtonAction(ActionEvent event){ // handling events related to the exit button - exit program
+    public void exitButtonAction(ActionEvent event){ // handling events related to the exit button - exit program
         System.exit(0);
     }
     @FXML
-    private void playPause(){ // if playing - pause, if paused - play
+    public void playPause(){ // if playing - pause, if paused - play
         if(isFileLoaded) {
             if (mediaPlayer.getStatus().equals(MediaPlayer.Status.PAUSED) || mediaPlayer.getStatus().equals(MediaPlayer.Status.STOPPED)) {
                 mediaPlayer.play();
@@ -206,7 +154,7 @@ public class Controller implements Initializable {
         }
     }
     @FXML
-    private void keyPressed(KeyEvent key){ // handling events related to keys pressed
+    public void keyPressed(KeyEvent key){ // handling events related to keys pressed
         switch (key.getCode()){
             case L: // jump 10 seconds forward
                 mediaPlayer.seek(Duration.seconds(mediaPlayer.getCurrentTime().toSeconds()+10));
@@ -239,7 +187,7 @@ public class Controller implements Initializable {
         }
     }
     @FXML
-    public void audioSpectrum(){ // calculating and displaying audio spectrum
+    private void audioSpectrum(){ // calculating and displaying audio spectrum
         audioSpectrumEnable();
         int bands = mediaPlayer.getAudioSpectrumNumBands();
         mediaPlayer.setAudioSpectrumListener(new AudioSpectrumListener() {
@@ -291,7 +239,7 @@ public class Controller implements Initializable {
     }
 
     @FXML
-    private float avg(int start, int number, float[] floats){
+    private float avg(int start, int number, float[] floats){ // calculating average - used in spectrum
         float sum = 0;
         for(int i = start; i<start+number; i++){
             sum += floats[i];
@@ -303,6 +251,89 @@ public class Controller implements Initializable {
         return Optional.ofNullable(filePath)
                 .filter(f -> f.contains("."))
                 .map(f -> f.substring(filePath.lastIndexOf(".") + 1));
+    }
+
+    @FXML
+    public MediaPlayer.Status getCurrentStatus(){
+        return mediaPlayer.getStatus();
+    }
+
+    @FXML
+    public Duration getCurrentTime(){
+        return mediaPlayer.getCurrentTime();
+    }
+
+    @FXML
+    public Color getSpectrumFill(){
+        return spectrumFill;
+    }
+
+    @FXML
+    public double getVolume(){
+        return mediaPlayer.getVolume();
+    }
+
+    @FXML
+    public double getCurrentRate(){
+        return mediaPlayer.getRate();
+    }
+
+    @FXML
+    public void loadTestFile(ActionEvent event){ // handling events related to the file selection button
+        audioSpectrumDisable();
+        File file = new File("src/images/test.mp4");
+        filePath = file.toURI().toString();
+        media = new Media(filePath);
+        preparePlayer();
+    }
+
+    private void preparePlayer() {
+        mediaPlayer = new MediaPlayer(media); // load media to a media player
+        mediaView.setMediaPlayer(mediaPlayer);
+        mediaPlayer.setOnReady(new Runnable() {
+            @Override
+            public void run() {
+                isFileLoaded = true;
+                DoubleProperty width = mediaView.fitWidthProperty();
+                DoubleProperty height = mediaView.fitHeightProperty();
+
+                width.bind(Bindings.selectDouble(mediaView.sceneProperty(), "width"));
+                height.bind(Bindings.selectDouble(mediaView.sceneProperty(), "height"));
+
+                volumeSlider.setValue(mediaPlayer.getVolume() * 100); // set default volume to 100%
+                volumeSlider.valueProperty().addListener(new InvalidationListener() {
+                    @Override
+                    public void invalidated(Observable observable) {
+                        mediaPlayer.setVolume(volumeSlider.getValue() / 100);
+                    }
+                });
+                timeSlider.setCursor(Cursor.CLOSED_HAND);
+                timeSlider.setMin(0);
+                timeSlider.setMax(mediaPlayer.getTotalDuration().toSeconds());
+                timeSlider.setValue(0);
+
+                mediaPlayer.currentTimeProperty().addListener(new ChangeListener<Duration>() {
+                    @Override
+                    public void changed(ObservableValue<? extends Duration> observableValue, Duration duration, Duration current) {
+
+                        timeSlider.setValue(current.toSeconds());
+                    }
+                });
+
+                timeSlider.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent mouseEvent) {
+                        mediaPlayer.seek(Duration.seconds(timeSlider.getValue()));
+                    }
+                });
+
+                if(getExtensionFromFilePath(filePath).equals(Optional.of("mp3")))
+                    audioSpectrum();
+
+                mediaPlayer.play();
+            }
+
+        });
     }
 
     @Override
