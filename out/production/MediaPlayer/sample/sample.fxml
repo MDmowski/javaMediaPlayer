@@ -25,12 +25,12 @@
                      <HBox.margin>
                         <Insets right="20.0" />
                      </HBox.margin></Button>
-                  <Button mnemonicParsing="false" onAction="#slowerButtonAction" text="Speed -25%" />
-                  <Button mnemonicParsing="false" onAction="#normalSpeedButtonAction" text="Speed 1x">
+                  <Button fx:id="slowerButton" mnemonicParsing="false" onAction="#slowerButtonAction" text="Speed -25%" />
+                  <Button fx:id="normalSpeedButton" mnemonicParsing="false" onAction="#normalSpeedButtonAction" text="Speed 1x">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin></Button>
-                  <Button mnemonicParsing="false" onAction="#fasterButtonAction" text="Speed +25%" />
+                  <Button fx:id="fasterButton" mnemonicParsing="false" onAction="#fasterButtonAction" text="Speed +25%" />
                   <Button fx:id="exitButton" mnemonicParsing="false" onAction="#exitButtonAction" text="Exit" />
                   <Slider fx:id="volumeSlider" />
                </children>

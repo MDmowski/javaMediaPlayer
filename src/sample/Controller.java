@@ -13,6 +13,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
 import javafx.scene.chart.BarChart;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.effect.BlendMode;
@@ -48,6 +49,7 @@ import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
 
+    public Button testButton;
     private MediaPlayer mediaPlayer;
 
     private Media media;
