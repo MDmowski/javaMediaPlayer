@@ -85,3 +85,9 @@ R - red, G - green, B - blue.
 Press F or double-click on media to switch to full-screen mode. Press ESC to exit full-screen mode.
 
 ![Fullscreen mode](fullscreenMode.png)
+
+### Exit program
+
+Click on "Exit" button in the control panel or close the application window.
+
+![Exit app](exit.png)

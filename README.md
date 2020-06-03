@@ -103,6 +103,12 @@ Press F or double-click on media to switch to full-screen mode. Press ESC to exi
 
 ![Fullscreen mode](doc/fullscreenMode.png)
 
+### Exit program
+
+Click on "Exit" button in the control panel or close the application window.
+
+![Exit app](doc/exit.png)
+
 ## How to run project
 In order to run the project you should add the following VM Options ( easy using IntelliJ , Eclipse or Netbeans ) :
 
