@@ -114,9 +114,8 @@ public class MainTest extends ApplicationTest {
         assertEquals("Volume after clicking on the center should be set to 50%", 0.5, testController.getVolume(), 0.05);
     }
     @Test
-    public void scrollMedia() throws InterruptedException {
+    public void scrollMediaSlider() throws InterruptedException {
         clickOn("#testButton");
-        Thread.sleep(200);
         Duration time = testController.getCurrentTime();
         clickOn("#timeSlider");
         assertNotEquals(time, testController.getCurrentTime());
