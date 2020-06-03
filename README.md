@@ -13,6 +13,20 @@
 - Spectrum visualizer when mp3 file loaded
 - Changing spectrum color using keys - R - red, G - green, B - blue
 
+## Manual
+
+### Play and pause
+![Play and pause](doc/playPause_small.gif)
+
+### Change volume and mute
+![Change volume and mute](doc/volumeChange_small.gif)
+
+### Scrubbing through file
+![Scrubbing through file](doc/scrubbing_small.gif)
+
+### Changing playback speed
+![Changing playback speed](doc/changeSpeed_small.gif)
+
 ## How to run project
 In order to run the project you should add the following VM Options ( easy using IntelliJ , Eclipse or Netbeans ) :
 
@@ -25,3 +39,4 @@ In order to run the project you should add the following VM Options ( easy using
 --add-exports javafx.graphics/com.sun.javafx.scene=org.controlsfx.controls,
 --add-exports javafx.graphics/com.sun.javafx.scene.traversal=org.controlsfx.controls
 ```
+
