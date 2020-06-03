@@ -18,7 +18,10 @@
 
 ### Open a file you want to play
 
-Use this button to choose a file you want to play
+Use this button to choose a file you want to play. Default file explorer will be opened,
+and you will be asked to choose a file from your computer.
+You will be able to choose only valid files -  mp3 and mp4 extensions. Other files won't be shown.
+
 
 ![Open file img](doc/openFile.png)
 

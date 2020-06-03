@@ -2,7 +2,9 @@
 
 ## Open a file you want to play
 
-Use this button to choose a file you want to play
+Use this button to choose a file you want to play. Default file explorer will be opened,
+and you will be asked to choose a file from your computer.
+You will be able to choose only valid files -  mp3 and mp4 extensions. Other files won't be shown.
 
 ![Open file img](openFile.png)
 
@@ -41,7 +43,7 @@ Use this slider to change volume. Press M to mute and press again to unmute.
 
 ## Scrub through the file
 
-Use this slider to scrub through the file
+Use this slider to scrub through the file.
 
 ![Scrubbing through file gif](scrubbing.png)
 
