@@ -13,7 +13,8 @@
 - Spectrum visualizer when mp3 file loaded
 - Changing spectrum color using keys - R - red, G - green, B - blue
 
-## Manual
+## Manual (<a href="https://gitlab-stud.elka.pw.edu.pl/mdmowski/javamediaplayer/-/blob/master/doc/manual.md">Manual only</a>)
+
 
 ### Open a file you want to play
 
